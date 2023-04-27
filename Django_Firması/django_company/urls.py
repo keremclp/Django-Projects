@@ -17,9 +17,10 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from page.views import (
-    home_view,
     about_us_view,
-    contact_us_view
+    contact_us_view,
+    home_view,
+    vision_view,
 )
 
 
@@ -31,8 +32,9 @@ from page.views import (
 
 # Danışma :)
 urlpatterns = [
-    path('',home_view,),
-    path('hakkimizda/',about_us_view,),
-    path('iletisim/',contact_us_view,),
+    path('',home_view, name='home'),
+    path('hakkimizda/',about_us_view, name='about_us'),
+    path('vizyonumuz/',vision_view, name='vision'),
+    path('iletisim/',contact_us_view, name='contact_us'),
     path('admin/', admin.site.urls),
 ]
