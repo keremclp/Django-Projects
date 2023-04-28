@@ -26,6 +26,9 @@ from django.urls import path,include
 
 # Danışma :)
 urlpatterns = [
-    path('', include('page.urls'),), # PAGE APPLICATION içindeki urls.py den alıyoruz...
     path('admin/', admin.site.urls),
+    path('urunler/', include('product.urls'),),
+    path('', include('page.urls'),), # PAGE APPLICATION içindeki urls.py den alıyoruz...
+    
+    
 ]
