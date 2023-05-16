@@ -1,0 +1,14 @@
+{% extends 'core/base.html' %}
+
+{% block container %}
+
+<h1 class="text-primary">TODO LIST ( {{ todos.count }} ) </h1>
+<ul>
+    {% for todo in todos %}
+    <li>
+        {{ todo.title }}
+    </li>
+    {% endfor %}
+</ul>
+
+{% endblock container %}
