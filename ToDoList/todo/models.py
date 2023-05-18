@@ -1,5 +1,6 @@
 from django.db import models
 from autoslug import AutoSlugField
+from django.urls import reverse
 # Create your models here.
 
 class Category(models.Model):
@@ -9,6 +10,12 @@ class Category(models.Model):
 
     def __str__(self) :
         return self.title
+    
+    def get_absolute_url(self):
+        return reverse(
+            "category_view", 
+            kwargs={"category_slug": self.slug}
+        )
 
 
 
@@ -23,5 +30,13 @@ class ToDo(models.Model):
     def __str__(self):
         return self.title
 
+    def get_absolute_url(self):
+        return reverse(
+            "todo_detail_view", 
+            kwargs={
+                "category_slug": self.category.slug,
+                "id": self.pk
+            }
 
+        )
 
