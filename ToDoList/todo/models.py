@@ -1,6 +1,7 @@
 from django.db import models
 from autoslug import AutoSlugField
 from django.urls import reverse
+from django.contrib.auth.models import User
 # Create your models here.
 
 class Category(models.Model):
@@ -20,6 +21,8 @@ class Category(models.Model):
 
 
 class ToDo(models.Model):
+
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True)
     title = models.CharField(max_length=200)
     content = models.TextField(blank=True, null=True) 
@@ -37,6 +40,4 @@ class ToDo(models.Model):
                 "category_slug": self.category.slug,
                 "id": self.pk
             }
-
         )
-
