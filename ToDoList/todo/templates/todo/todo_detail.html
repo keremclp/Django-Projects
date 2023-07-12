@@ -16,7 +16,7 @@
             <p class="card-text">{{ todo.content }}</p>
             <ul class="list-unstyled ">
                 <li><small>Oluşturulduğu zaman : {{ todo.created_at | date:"d/m/Y H:s" }}</small></li>
-                <li><small>Güncellendiği zaman : {{ todo.updated_at | date:"d/m/Y H:s" }}</small></li>
+                <li><small>Sistemde Güncellendiği zaman : {{ todo.updated_at | date:"d/m/Y H:s" }}</small></li>
             </ul>
             <ul class="list-inline">
                 {% for tag in todo.tag.all %}
