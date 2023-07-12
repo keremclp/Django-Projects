@@ -18,6 +18,15 @@
                 <li><small>Oluşturulduğu zaman : {{ todo.created_at | date:"d/m/Y H:s" }}</small></li>
                 <li><small>Güncellendiği zaman : {{ todo.updated_at | date:"d/m/Y H:s" }}</small></li>
             </ul>
+            <ul class="list-inline">
+                {% for tag in todo.tag.all %}
+                <li class="list-inline-item">
+                    <a href="{{ tag.get_absolute_url }}">
+                        <span class="badge rounded-pill text-bg-warning">{{ tag }}</span>
+                    </a>
+                </li>
+                {% endfor %}
+            </ul>
             <a href="/" class="card-link">Geri Dön</a>
         </div>
     </div>

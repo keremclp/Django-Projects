@@ -6,6 +6,8 @@
     <h1 class="text-primary">TODO LIST ( {{ todos.count }} ) </h1>
     {% if category %}
     <h3 class="text-secondary">Kategori : {{ category }}</h3>
+    {% elif tag %}
+    <h3 class="text-secondary">Tag: {{ tag }}</h3>
     {% endif %}
     <div class="list-group">
         {% for todo in todos %}

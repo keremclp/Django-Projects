@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import ToDo, Category
+from .models import ToDo, Category,Tag
 # Register your models here.
 class CategoryAdmin(admin.ModelAdmin):
     list_display = [
@@ -25,7 +25,6 @@ class ToDoAdmin(admin.ModelAdmin):
         'category',
     ]
 
-
 admin.site.register(ToDo, ToDoAdmin)
 admin.site.register(Category,CategoryAdmin)
-
+admin.site.register(Tag)
