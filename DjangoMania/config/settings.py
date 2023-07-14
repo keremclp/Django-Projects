@@ -40,6 +40,7 @@ BASE_APPS = [
 ]
 
 THIRD_PARTY_APPS =[
+    'tinymce',
 
 ] 
 MY_APPS= [
@@ -75,6 +76,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'config.global_context_processor.global_todo_categories_context',
+                'config.global_context_processor.global_page_context',
             ],
         },
     },

@@ -18,17 +18,26 @@ from django.contrib import admin
 from config.views import logout_view 
 from django.urls import  path,include
 from page.views import home_view
+
+from django.conf import settings
+from django.conf.urls.static import static
+
+
 urlpatterns = [
     path('', home_view,name="home"),
-    
+    #Page App
+    path('page/', include('page.urls', namespace='page')),
+     
     #Todo app
     path('todo/', include('todo.urls', namespace='todo')),
 
     #Auth:
     path('account/logout/', logout_view,name="logout_view"),
 
+    #TinyMCE
+    path('tinymce/', include('tinymce.urls')),
    
 
     #ADMIN:
     path('admin/', admin.site.urls),
-]
+] + static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
