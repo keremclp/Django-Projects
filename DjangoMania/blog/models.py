@@ -16,12 +16,12 @@ class BlogCategory(models.Model):
     def __str__(self):
         return self.title
     
-    # TODO: get_absolute_url
-    # def get_absolute_url(self):
-    #     return reverse(
-    #         "todo:category_view",
-    #         kwargs={"category_slug": self.slug},
-    #     )
+    
+    def get_absolute_url(self):
+        return reverse(
+            "blog:category_view",
+            kwargs={"category_slug": self.slug},
+        )
 
 
 class BlogTag(models.Model):
@@ -34,12 +34,12 @@ class BlogTag(models.Model):
     def __str__(self):
         return self.title
     
-    # TODO: get_absolute_url
-    # def get_absolute_url(self):
-    #     return reverse(
-    #         "todo:tag_view",
-    #         kwargs={"tag_slug": self.slug}
-    #     )
+   
+    def get_absolute_url(self):
+        return reverse(
+            "blog:tag_view",
+            kwargs={"tag_slug": self.slug}
+        )
     
 
 class Post(models.Model):
@@ -64,12 +64,12 @@ class Post(models.Model):
         return self.title
     
     
-    # TODO: get_absolute_url
-    # def get_absolute_url(self):
-    #     return reverse(
-    #         "todo:todo_detail_view",
-    #         kwargs={
-    #             "category_slug": self.category.slug,
-    #             "id": self.pk
-    #         },
-    #     )
+    
+    def get_absolute_url(self):
+        return reverse(
+            "blog:post_detail_view",
+            kwargs={
+                "category_slug": self.category.slug,
+                "post_slug": self.slug
+            },
+        )

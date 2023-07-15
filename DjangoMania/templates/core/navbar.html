@@ -10,6 +10,8 @@
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="/">Ana Sayfa</a>
                 </li>
+
+                {% if request.user.is_authenticated %}
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                         aria-expanded="false">
@@ -24,11 +26,18 @@
                         {% endfor %}
                     </ul>
                 </li>
+                {% endif %}
+                
                 {% for page in global_pages %}
                 <li class="nav-item">
                     <a class="nav-link" aria-current="page" href="{{ page.get_absolute_url }}">{{ page.title }}</a>
                 </li>
                 {% endfor %}
+
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="{% url 'blog:all_post_view' %}">Blog</a>
+                </li>
+
                 {% if request.user.is_authenticated %}
                 <li class="nav-item">
                     <a class="nav-link" aria-current="page" href="{% url 'logout_view' %}">Oturumu Kapat</a>
