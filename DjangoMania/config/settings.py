@@ -25,7 +25,10 @@ SECRET_KEY = 'django-insecure-jrn6ak52z=jmzzob!ym@3f=z#2_*p5x%js8t7as5^3g5^(ma5^
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    '127.0.0.1',
+    '192.168.1.40'
+]
 
 
 # Application definition
@@ -46,6 +49,7 @@ THIRD_PARTY_APPS =[
 MY_APPS= [
     'todo',
     'page',
+    'blog',
 ]
 
 INSTALLED_APPS= BASE_APPS + THIRD_PARTY_APPS + MY_APPS
