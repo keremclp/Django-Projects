@@ -1,7 +1,9 @@
 from django.contrib import messages
 from django.shortcuts import render,redirect
 from django.contrib.auth import authenticate, login,logout
-
+from django.contrib.auth.models import User
+from user_profile.models import Profile
+from slugify import slugify
 # Create your views here.
 
 def login_view(request):
@@ -13,10 +15,11 @@ def login_view(request):
     
     context = dict()
     if request.method == "POST":
+        print(request.POST)
         username = request.POST.get('username')
         password = request.POST.get('password')
         user = authenticate(request, username=username, password=password)
-        print(username,password)
+
         # Bilgileri doğru bir şekilde aldık mı ?
         if len(username) < 6 or len(password) < 6 :
             messages.warning(request,'Username or password is too short.')
@@ -35,3 +38,70 @@ def logout_view(request):
     messages.info(request,f'{request.user.username} successfully logged out.')
     logout(request)
     return redirect('home_view')
+
+
+def register_view(request):
+    context = dict()
+    if request.method == "POST":
+        post_info = request.POST
+        email = post_info.get('email')
+        email_confirm = post_info.get('email_confirm')
+        first_name = post_info.get('first_name')
+        last_name = post_info.get('last_name')
+        password = post_info.get('password')
+        password_confirm = post_info.get('password_confirm')
+        instagram = post_info.get('instagram')
+        
+
+        # print(email,email_confirm, password,password_confirm,first_name,last_name,instagram)
+        
+        if len(first_name)<3 or len(last_name)<3 or len(email)<3 or len(password)<3:
+            messages.warning(request,'Please fill the all fields.')
+            return redirect('user_profile:register_view')
+        if email != email_confirm :
+            messages.warning(request,'Emails are not same.')
+            return redirect('user_profile:register_view')
+
+        if password != password_confirm :
+            messages.warning(request,'Passwords are not same.')
+            return redirect('user_profile:register_view')
+
+        user, created = User.objects.get_or_create(username = email)
+        if not created :
+            # Niye buraya geldin hacı
+            user_login = authenticate(
+                request, 
+                username=email, 
+                password=password
+            )
+            if user is not None:
+                # Email adresi var ve şifre doğru
+                messages.success(request,'This email already exists.Going home')
+                login(request,user_login)
+                return redirect('home_view')
+            # Email adresi var ama diyelim ki şifrei yanlış girdi
+            messages.warning(request,f'{email} adresi sistemde kayitli ama login olmadiniz. Login sayfasina yönlendirilme .')
+            return redirect('user_profile:login_view')
+        user.email = email
+        user.first_name = first_name
+        user.last_name = last_name
+        user.set_password(password)
+        
+
+        profile, profile_created = Profile.objects.get_or_create(user=user)
+        profile.instagram = instagram
+        profile.slug = slugify(f"{first_name}-{last_name}")
+        user.save()
+        profile.save()
+
+        messages.success(request,f'{user.first_name} Sisteme kayit işlemi tamamlandi .')
+        user_login = authenticate(
+            request, 
+            username=email, 
+            password=password
+        )
+        login(request,user_login)
+        return redirect('home_view')
+        
+
+    return render(request, 'user_profile/register.html',context)
