@@ -9,7 +9,7 @@ class BlogPostModelForm(forms.ModelForm):
     tag = forms.CharField(required=False)
     content = forms.CharField(widget=TinyMCE(attrs={'cols': 80, 'rows': 20}))
     # title = forms.CharField(validators=[validators.MinLengthValidator(3, message="Oops..En az üç karakter olsun")])
-    title = forms.CharField(validators=[min_lenght_3,])
+    title = forms.CharField(validators=[min_lenght_3])
 
     class Meta:
         model = BlogPost

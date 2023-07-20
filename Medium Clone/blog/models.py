@@ -17,7 +17,17 @@ class CommonModel(models.Model):
     class Meta:
         abstract = True
 
-
+class Tag(CommonModel):
+    
+    def __str__(self):
+        return self.title
+    
+   
+    # def get_absolute_url(self):
+    #     return reverse(
+    #         "blog:tag_view",
+    #         kwargs={"tag_slug": self.slug}
+    #     )
 
 class Category(CommonModel):
 
@@ -31,17 +41,7 @@ class Category(CommonModel):
     #     )
 
 
-class Tag(CommonModel):
-    
-    def __str__(self):
-        return self.title
-    
-   
-    # def get_absolute_url(self):
-    #     return reverse(
-    #         "blog:tag_view",
-    #         kwargs={"tag_slug": self.slug}
-    #     )
+
     
 
 class BlogPost(CommonModel):
