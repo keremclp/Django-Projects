@@ -30,5 +30,8 @@ urlpatterns = [
     # USER :
     path('user/', include('user_profile.urls', namespace='user_profile'),),
 
+    # READ :
+    path('read/', include('read.urls', namespace='read'),),
+
     path('admin/', admin.site.urls),
 ] + static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

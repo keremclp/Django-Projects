@@ -38,16 +38,18 @@ BASE_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 ]
-THIRD_PARTY_APPS=[
+THIRD_PARTY_APPS = [
     'tinymce',
     'crispy_forms',
     'crispy_bootstrap5',
     'django_extensions',
+    'easy_thumbnails'
 ]
-MY_APPS =[
+MY_APPS = [
     'page',
     'user_profile',
     'blog',
+    'read',
 ]
 
 INSTALLED_APPS = BASE_APPS + THIRD_PARTY_APPS + MY_APPS
@@ -150,3 +152,12 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 
 CRISPY_TEMPLATE_PACK = "bootstrap5"
+
+THUMBNAIL_ALIASES = {
+    '': {
+        'avatar': {'size': (30, 30), 'crop': True},
+        'avatar2': {'size': (60, 60), 'crop': True},
+        'thumbnail': {'size': (400, 300), 'crop': True},
+        'page': {'size': (1000, 250), 'crop': True},
+    },
+}

@@ -2,14 +2,31 @@ from django.contrib import admin
 from blog.models import Category, Tag, BlogPost
 # Register your models here.
 
+
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
-    pass
+    # list display
+    list_display = (
+        'pk',
+        'title',
+        'isActive',
+    )
+
 
 @admin.register(Tag)
 class TagAdmin(admin.ModelAdmin):
-    pass
+    list_display = (
+        'pk',
+        'title',
+        'isActive',
+    )
+
 
 @admin.register(BlogPost)
 class BlogPostAdmin(admin.ModelAdmin):
-    pass
+    list_display = (
+        'pk',
+        'title',
+        'isActive',
+        'view_count',
+    )

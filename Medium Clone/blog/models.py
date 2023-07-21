@@ -16,6 +16,7 @@ class CommonModel(models.Model):
     
     class Meta:
         abstract = True
+        ordering = ('title',)
 
 class Tag(CommonModel):
     
@@ -23,22 +24,22 @@ class Tag(CommonModel):
         return self.title
     
    
-    # def get_absolute_url(self):
-    #     return reverse(
-    #         "blog:tag_view",
-    #         kwargs={"tag_slug": self.slug}
-    #     )
+    def get_absolute_url(self):
+        return reverse(
+            "blog:tag_view",
+            kwargs={"tag_slug": self.slug}
+        )
 
 class Category(CommonModel):
 
     def __str__(self):
         return self.title
     
-    # def get_absolute_url(self):
-    #     return reverse(
-    #         "blog:category_view",
-    #         kwargs={"category_slug": self.slug},
-    #     )
+    def get_absolute_url(self):
+        return reverse(
+            "blog:category_view",
+            kwargs={"category_slug": self.slug},
+        )
 
 
 
@@ -56,13 +57,15 @@ class BlogPost(CommonModel):
     def __str__(self):
         return self.title
     
+    class Meta:
+        ordering = ('created_at',)
     
     
-    # def get_absolute_url(self):
-    #     return reverse(
-    #         "blog:post_detail_view",
-    #         kwargs={
-    #             "category_slug": self.category.slug,
-    #             "post_slug": self.slug
-    #         },
-    #     )
+    def get_absolute_url(self):
+        return reverse(
+            "read:post_detail_view",
+            kwargs={
+                "user_slug": self.user.profile.slug,
+                "post_slug": self.slug
+            },
+        )
