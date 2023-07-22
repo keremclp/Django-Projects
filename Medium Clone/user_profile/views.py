@@ -4,7 +4,44 @@ from django.contrib.auth import authenticate, login,logout
 from django.contrib.auth.models import User
 from user_profile.models import Profile
 from slugify import slugify
+from django.contrib.auth.decorators import login_required
+
+from .forms import ProfileModelForm
 # Create your views here.
+
+@login_required(login_url='user_profile:login_view')
+def profile_edit_view(request):
+    user = request.user
+    initial_data = dict(
+        first_name = user.first_name,
+        last_name = user.last_name,
+    )
+    form = ProfileModelForm(instance= user.profile, initial=initial_data)
+
+    if request.method == "POST":
+        form = ProfileModelForm(
+            request.POST or None, 
+            request.FILES or None, 
+            instance= user.profile
+        )
+        if form.is_valid():
+            f = form.save(commit=False)
+            user.first_name = form.cleaned_data.get('first_name')
+            user.last_name = form.cleaned_data.get('last_name')
+            user.save()
+            f.save()
+            messages.success(request,"Profile updated.")
+            return redirect('user_profile:profile_edit_view')
+        else:
+            messages.warning(request,"Profile not updated.")
+            return redirect('user_profile:profile_edit_view')
+
+    context = dict(
+        form = form,
+        title = "Profile Edit",
+    )
+    return render(request, 'common_components/form.html', context)
+
 
 def login_view(request):
     # Login olan kullanıcı direkt olarak ana sayfaya gitsin

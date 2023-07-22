@@ -9,8 +9,10 @@ import json
 
 @login_required(login_url='user_profile:login_view')
 def create_blog_post_view(request):
+    title = "Yeni Blog Post :"
     form = BlogPostModelForm()
     context = dict(
+        title = title,
         form = form
     )
     
@@ -32,7 +34,7 @@ def create_blog_post_view(request):
             return redirect('home_view')
     
 
-    return render(request, 'blog/create_blog_post.html', context)
+    return render(request, 'common_components/form.html', context)
 
 def category_view(request,category_slug):
     category = get_object_or_404(Category,slug=category_slug)
