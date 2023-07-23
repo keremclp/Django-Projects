@@ -2,12 +2,26 @@ from django.contrib import messages
 from django.shortcuts import render,redirect
 from django.contrib.auth import authenticate, login,logout
 from django.contrib.auth.models import User
+
 from user_profile.models import Profile
+from blog.models import BlogPost
+
 from slugify import slugify
 from django.contrib.auth.decorators import login_required
 
 from .forms import ProfileModelForm
 # Create your views here.
+@login_required(login_url='user_profile:login_view')
+def user_fav_view(request):
+    # user = request.user
+    # favs = user.userpostfav_set.filter(is_deleted=False).order_by('-updated_at')
+    ids = request.user.userpostfav_set.filter(is_deleted= False).values_list('post_id',flat =True).order_by('-updated_at')
+    context = dict(
+        title = "Favs",
+        favs = BlogPost.objects.filter(id__in=ids, isActive=True)
+    )
+    return render(request, 'blog/post_list.html', context)
+
 
 @login_required(login_url='user_profile:login_view')
 def profile_edit_view(request):
