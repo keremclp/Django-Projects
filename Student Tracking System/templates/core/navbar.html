@@ -1,0 +1,50 @@
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg bg-primary border-bottom border-dark">
+    <div class="container py-2">
+        <a class="navbar-brand text-white" href="#">Student Tracking System</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
+            aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse text-white" id="navbarNavAltMarkup">
+            <ul class="navbar-nav ms-auto ">
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="#">
+                        Our story
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="#">
+                        Membership
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="#">Write</a>
+                </li>
+                {% if not request.user.is_authenticated %}
+                <li class="nav-item text-white">
+                    <a href="#" class="nav-link">Sign In</a>
+                </li>
+                <li class="nav-item text-white">
+                    <a class="nav-link btn btn-dark text-light px-3 rounded-pill ms-3" href="#">Get Started</a>
+                </li>
+                {% else %}
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"></a>
+                    <ul class="dropdown-menu">
+                      <li><a class="dropdown-item text-dark" href="#">Edit Profile</a></li>
+                      <li><a class="dropdown-item text-dark"  href="#">All Posts</a></li>
+                      <li><a class="dropdown-item text-dark" href="#">Favs</a></li>
+                    </ul>
+                </li>  
+                <li class="nav-item">
+                    <a class="nav-link btn btn-dark text-light px-3 rounded-pill ms-3 " href="#">Logout</a>
+                </li>   
+                {% endif %}
+                
+              </ul>
+            </div>
+        </div>
+    </div>
+</nav>
+<!-- NAVBAR END -->

@@ -69,6 +69,7 @@ def login_view(request):
         print(request.POST)
         username = request.POST.get('username')
         password = request.POST.get('password')
+        
         user = authenticate(request, username=username, password=password)
 
         # Bilgileri doğru bir şekilde aldık mı ?
