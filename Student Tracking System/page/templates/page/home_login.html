@@ -3,66 +3,50 @@
 
 
 {% block css %}
-  <link rel="stylesheet" href="{% static 'css/Log-in.css' %}">
+
 {% endblock css %}
 
 {% block content %}
 
-<div class="container" id="container">
-  <div class="form-container sign-up-container">
-    <form action="#">
-      
-      <h1>Create Account</h1>
-      <span>or use your email for registration</span>
-      <input type="text" placeholder="Name" />
-      <input type="email" placeholder="Email" />
-      <input type="password" placeholder="Password" />
-      <button>Sign Up</button>
-    </form>
-  </div>
-  <div class="form-container sign-in-container">
-    <form method="post">
-      {% csrf_token %}
-      <h1>Sign in</h1>
-      <span>or use your account</span>
-      <input type="email" placeholder="Email" name="username"/>
-      <input type="password" placeholder="Password" name="password"/>
-      <a href="#">Forgot your password?</a>
-      <button type="submit">Sign In</button>
-    </form>
-  </div>
-  <div class="overlay-container">
-    <div class="overlay">
-      <div class="overlay-panel overlay-left">
-        <h1>Welcome Back!</h1>
-        <p>To keep connected with us please login with your personal info</p>
-        <button class="ghost" id="signIn">Sign In</button>
-      </div>
-      <div class="overlay-panel overlay-right">
-        <h1>Hello, Friend!</h1>
-        <p>Enter your personal details and start journey with us</p>
-        <button class="ghost" id="signUp">Sign Up</button>
-      </div>
+<!-- Create login page, in the center  -->
+<div class="mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <h1 class="text-center mb-4">Login</h1>
+      <form method="post">
+        {% csrf_token %}
+        <div class="form-group d-flex justify-content-center">
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="user_type" value="student" id="student_radio" checked>
+            <label class="form-check-label" for="student_radio">Student</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="user_type" value="teacher" id="teacher_radio">
+            <label class="form-check-label" for="teacher_radio">Teacher</label>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="username">Username:</label>
+          <input type="text" name="username" class="form-control" id="username" required>
+        </div>
+        <div class="form-group">
+          <label for="password">Password:</label>
+          <input type="password" name="password" class="form-control" id="password" required>
+        </div>
+        <button type="submit" class="mt-2 btn btn-primary btn-block">Login</button>
+      </form>
     </div>
   </div>
 </div>
+
+  
+
 
 
 {% endblock content %}
 
 {% block script %}
-<script>
-  const signUpButton = document.getElementById('signUp');
-  const signInButton = document.getElementById('signIn');
-  const container = document.getElementById('container');
-
-  signUpButton.addEventListener('click', () => {
-    container.classList.add("right-panel-active");
-  });
-
-  signInButton.addEventListener('click', () => {
-    container.classList.remove("right-panel-active");
-  });
-</script>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
 
 {% endblock script %}
