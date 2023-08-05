@@ -45,6 +45,8 @@ THIRD_PART_APPS = [
 
 MY_APPS = [
     'page',
+    'user_profile',
+    'account',
 ]
 
 INSTALLED_APPS = BASE_APPS + THIRD_PART_APPS + MY_APPS
@@ -131,7 +133,14 @@ STATIC_URL = 'static/'
 STATICFILES_DIRS = [
     BASE_DIR / 'static_files',
 ]
+ADMINS = [
+    ('KEREM CAN', 'django@django.com'),
+]
 
+AUTH_USER_MODEL = 'account.User'
+# Allow only staff and superusers to login to the admin page
+
+LOGIN_ADMIN_RESTRICTED = True
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
