@@ -12,13 +12,13 @@ def login_view(request):
             username = form.cleaned_data.get('username')
             password = form.cleaned_data.get('password')
             user = authenticate(username=username, password=password)
-            if user is not None and user.is_student:
+            if user is not None and user.role == 'student':
                 login(request, user)
                 return redirect('account:student')
-            elif user is not None and user.is_teacher:
+            elif user is not None and user.role == 'teacher':
                 login(request, user)
                 return redirect('customer')
-            elif user is not None and user.is_parent:
+            elif user is not None and user.role == 'parent':
                 login(request, user)
                 return redirect('employee')
             else:
@@ -34,7 +34,7 @@ def register_view(request):
     if request.method == 'POST':
         form = SignUpForm(request.POST)
         if form.is_valid():
-            user = form.save()
+            form.save()
             msg = 'user created'
             return redirect('account:login_view')
         else:

@@ -49,6 +49,16 @@ class SignUpForm(UserCreationForm):
         )
     )
 
+    role = forms.ChoiceField(
+        choices=User.roles,
+        widget=forms.RadioSelect(
+            
+            attrs={
+                
+                "class": ""
+            }
+        ),
+    )            
     class Meta:
         model = User
-        fields = ('username', 'email', 'password1', 'password2', 'is_student', 'is_teacher', 'is_parent')
+        fields = ('username', 'email', 'password1', 'password2', 'role')
