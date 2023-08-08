@@ -146,3 +146,12 @@ LOGIN_ADMIN_RESTRICTED = True
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+
+
+# YAPILMASI DÜŞÜNÜNLER:
+
+# Teacher için öğrenciyi takip etme 
+# Öğrenci ve Teacher için bilgilerini güncelleme
+
